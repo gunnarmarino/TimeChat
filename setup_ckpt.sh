@@ -22,15 +22,19 @@ fi
 
 # Clone the pre-trained Language Decoder (LLaMA-2-7B) and Video Encoder (Video Q-Former of Video-LLaMA) if they don't exist
 if [ ! -d "$ckpt_path/Video-LLaMA-2-7B-Finetuned/llama-2-7b-chat-hf" ] || [ ! -f "$ckpt_path/Video-LLaMA-2-7B-Finetuned/VL_LLaMA_2_7B_Finetuned.pth" ]; then
+  git lfs install
   git clone https://huggingface.co/DAMO-NLP-SG/Video-LLaMA-2-7B-Finetuned $ckpt_path/Video-LLaMA-2-7B-Finetuned
-  mv $ckpt_path/Video-LLaMA-2-7B-Finetuned/VL_LLaMA_2_7B_Finetuned.pth $ckpt_path/Video-LLaMA-2-7B-Finetuned/
-  mv $ckpt_path/Video-LLaMA-2-7B-Finetuned/llama-2-7b-chat-hf $ckpt_path/Video-LLaMA-2-7B-Finetuned/
 fi
 
 # Clone the Instruct-tuned TimeChat-7B if it doesn't exist
 if [ ! -f "$ckpt_path/timechat/timechat_7b.pth" ]; then
+  git lfs install
   git clone https://huggingface.co/ShuhuaiRen/TimeChat-7b $ckpt_path/timechat
-  mv $ckpt_path/timechat/timechat_7b.pth $ckpt_path/timechat/
+fi
+
+if [ ! -f "$ckpt_path/timechat/timechat_7b.pth" ]; then
+  git lfs install
+  git clone https://huggingface.co/ShuhuaiRen/TimeChat-7b-paper $ckpt_path/timechat
 fi
 
 # Remove empty directories
